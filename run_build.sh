@@ -17,3 +17,6 @@ cd ./vim
             --enable-largefile
 make
 sudo make install
+
+mkdir ~/.vim/lua/
+cp *.lua ~/.vim/lua
