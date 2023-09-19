@@ -33,17 +33,24 @@ set noswapfile
 """"""""""""""""""""""""""""""""""""""""""""
 " Commands:
 
-"command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
+command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 autocmd BufWritePre * %s/\s\+$//e
+set include=^\s*#\s*include
 autocmd FileType lua set includeexpr=substitute(v:fname,'\\(.*\\)','\\1.lua','')
 autocmd FileType lua setlocal include=^\s*require
 
 """"""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""
+
+function! CallIt()
+    execute "!echo " . getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]
+endfunction
+
 " Mappings:
 map <C-c> :!typos %<CR>
 map <C-R> :!typos -w %<CR>L<CR>
+map <C-T> :call CallIt()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""
 
@@ -59,8 +66,8 @@ set ffs=unix
 
 """"""""""""""""""""""""""""""""""""""""""""
 " Lua:
-luafile ./vimComplete.lua
-luafile ./helper.lua
+luafile ~/Documents/my_dev/my_vim/helper.lua
+luafile ~/Documents/my_dev/my_vim/vimComplete.lua
 
 lua vimComplete.setPath(vim)
 

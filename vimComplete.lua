@@ -4,7 +4,7 @@ vimComplete = {}
 
 function vimComplete.setPath(vim)
 	local paths = {}
-	for path in string.gmatch(";" .. package.path .. ";", ";(\.?/.-/?)\?.lua;") do
+	for path in string.gmatch(";" .. package.path .. ";", ";(%.?/.-/?)%?.lua;") do
 		table.insert(paths, path)
 	end
 	for key, val in pairs(paths or {}) do
