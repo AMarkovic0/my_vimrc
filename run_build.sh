@@ -10,10 +10,7 @@ else
 fi
 
 # Install vim compiled with lua interpreter
-if [ ! -d $(pwd)/vim ];
-then
-  git clone https://github.com/vim/vim.git
-fi
+git submodule update --init --recursive --remote
 cd $(pwd)/vim
 
 sudo apt-get install liblua5.1-dev
