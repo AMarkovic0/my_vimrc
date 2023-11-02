@@ -1,3 +1,5 @@
+USR_DIR=$(getent passwd "$USER" | cut -d: -f6)
+
 #Dependencies
 if [ $(which cargo) ];
 then
@@ -23,6 +25,19 @@ cd ./vim
             --enable-largefile
 make
 sudo make install
+cp $(pwd)/src/vim
+cd -
 
-mkdir ~/.vim/lua/
-cp *.lua ~/.vim/lua
+DOT_VIM_DIR=${USR_DIR}/.vim
+
+if [ ! -d $DOT_VIM_DIR ];
+then
+  mkdir $DOT_VIM_DIR
+fi
+if [ ! -d $DOT_VIM_DIR/lua ];
+then
+  mkdir $DOT_VIM_DIR/lua
+fi
+
+cp *.lua $DOT_VIM_DIR
+cp .vimrc $USR_DIR
