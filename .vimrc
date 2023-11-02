@@ -66,8 +66,8 @@ set ffs=unix
 
 """"""""""""""""""""""""""""""""""""""""""""
 " Lua:
-luafile ~/Documents/my_dev/my_vim/helper.lua
-luafile ~/Documents/my_dev/my_vim/vimComplete.lua
+luafile ~/.vim/lua/helper.lua
+luafile ~/.vim/lua/vimComplete.lua
 
 lua vimComplete.setPath(vim)
 
