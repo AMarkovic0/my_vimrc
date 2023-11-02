@@ -1,5 +1,11 @@
 #Dependencies
-cargo install typos-cli
+if [ $(which cargo) ];
+then
+  cargo install typos-cli
+else
+  echo "ERROR: Cargo not found."
+  exit 1
+fi
 
 # Install vim compiled with lua interpreter
 git clone https://github.com/vim/vim.git
