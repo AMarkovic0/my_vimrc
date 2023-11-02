@@ -10,8 +10,16 @@ else
 fi
 
 # Install vim compiled with lua interpreter
-git clone https://github.com/vim/vim.git
-cd ./vim
+if [ ! -d $(pwd)/vim ];
+then
+  git clone https://github.com/vim/vim.git
+fi
+cd $(pwd)/vim
+
+sudo apt-get install liblua5.1-dev
+sudo cp -r /usr/include/lua5.1/* /usr/include/lua5.1/include/
+sudo ln -s /usr/lib/x86_64-linux-gnu/liblua5.1.so /usr/local/lib/liblua.so
+
 ./configure --with-features=huge \
             --enable-cscope \
             --enable-pythoninterp=yes \
@@ -21,7 +29,7 @@ cd ./vim
             --disable-gui \
             --disable-netbeans \
             --enable-luainterp=yes \
-            --with-lua-prefix=/usr/include/lua5.1 \
+            --with-lua-prefix=/usr/ \
             --enable-largefile
 make
 sudo make install
