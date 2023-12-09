@@ -45,21 +45,58 @@ hi Search cterm=NONE ctermfg=white ctermbg=blue
 """"""""""""""""""""""""""""""""""""""""""""
 " Commands:
 
-command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
 autocmd BufWritePre * %s/\s\+$//e
-set include=^\s*#\s*include
 autocmd FileType lua set includeexpr=substitute(v:fname,'\\(.*\\)','\\1.lua','')
 autocmd FileType lua setlocal include=^\s*require
+autocmd FileType c,cpp,h,hpp setlocal include=^\s*#\s*include
+
+function! PackCode(code_lines)
+    shellescape(join(a:code_lines, "\\\n\r"))
+endfunction
+
+function! GetVisualSelection()
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+
+    if len(lines) == 0
+        return ''
+    endif
+
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive') ? 1 : 2)]
+    let lines[0] = lines[0] = lines[0][column_start - 1:]
+
+    return PackCode(lines)
+endfunction
+
+function! GetWholeFile()
+    let line_start = 1
+    let line_end = line('$')
+    let lines = getline(line_start, line_end)
+
+    if len(lines) == 0
+        return ''
+    endif
+
+    return PackCode(lines)
+endfunction
+
+command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
+command SpellC setlocal spell spelllang=en_us
+command -nargs=1 SLua vim "<args>" **/*.lua
+command -nargs=1 Sc vim "<args>" **/*.c*
+command -nargs=1 Sh vim "<args>" **/*.h*
+command -nargs=1 Exec new | r ! "<args>"
 
 """"""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""
+" Mappings:
 
 function! CallIt()
     execute "!echo " . getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]
 endfunction
 
-" Mappings:
 map <C-c> :!typos %<CR>
 map <C-R> :!typos -w %<CR>L<CR>
 map <C-T> :call CallIt()<CR>
