@@ -19,7 +19,10 @@ set history=500
 set cmdheight=1
 set backspace=indent,eol,start
 set tabstop=8 shiftwidth=8
+set ffs=unix
 set hlsearch
+set laststatus=2
+set statusline+=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 set complete+=i
 set complete+=k
