@@ -34,6 +34,15 @@ set noswapfile
 """"""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""
+" Syntax_and_colors:
+
+syntax on
+colorscheme default
+hi Search cterm=NONE ctermfg=white ctermbg=blue
+
+""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""
 " Commands:
 
 command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
@@ -54,16 +63,6 @@ endfunction
 map <C-c> :!typos %<CR>
 map <C-R> :!typos -w %<CR>L<CR>
 map <C-T> :call CallIt()<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""""""""""""""
-" Syntax_and_colors:
-
-syntax on
-colorscheme default
-hi Search cterm=NONE ctermfg=white ctermbg=blue
-set ffs=unix
 
 """"""""""""""""""""""""""""""""""""""""""""
 
