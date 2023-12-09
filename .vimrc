@@ -68,21 +68,22 @@ map <C-T> :call CallIt()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""
 " Lua:
-luafile ~/.vim/lua/helper.lua
-luafile ~/.vim/lua/vimComplete.lua
 
-lua vimComplete.setPath(vim)
-
-command -nargs=+ MkFun lua vimComplete.makeFun(vim.buffer(), vim.window().line, "<args>")
-command -nargs=+ MkLoop lua vimComplete.makeLoop(vim.buffer(), vim.window().line, "<args>")
-command -nargs=+ MkIf lua vimComplete.makeIfStatement(vim.buffer(), vim.window().line, "<args>")
-
-imap <C-f> <Esc> :MkFun <C-R><C-A><CR>dd<CR> i
-imap <C-l> <Esc> :MkLoop <C-R><C-A><CR>dd<CR> i
-imap <C-s> <Esc> :MkIf <C-R><C-A><CR>dd<CR> i
-
-map <C-f> <Esc> :MkFun <C-R><C-A><CR>dd<CR>
-map <C-l> <Esc> :MkLoop <C-R><C-A><CR>dd<CR>
-map <C-s> <Esc> :MkIf <C-R><C-A><CR>dd<CR>
+"luafile ~/.vim/lua/helper.lua
+"luafile ~/.vim/lua/vimComplete.lua
+"
+"lua vimComplete.setPath(vim)
+"
+"command -nargs=+ MkFun lua vimComplete.makeFun(vim.buffer(), vim.window().line, "<args>")
+"command -nargs=+ MkLoop lua vimComplete.makeLoop(vim.buffer(), vim.window().line, "<args>")
+"command -nargs=+ MkIf lua vimComplete.makeIfStatement(vim.buffer(), vim.window().line, "<args>")
+"
+"imap <C-f> <Esc> :MkFun <C-R><C-A><CR>dd<CR> i
+"imap <C-l> <Esc> :MkLoop <C-R><C-A><CR>dd<CR> i
+"imap <C-s> <Esc> :MkIf <C-R><C-A><CR>dd<CR> i
+"
+"map <C-f> <Esc> :MkFun <C-R><C-A><CR>dd<CR>
+"map <C-l> <Esc> :MkLoop <C-R><C-A><CR>dd<CR>
+"map <C-s> <Esc> :MkIf <C-R><C-A><CR>dd<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""
